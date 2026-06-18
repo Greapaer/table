@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Астрология</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -654,20 +655,6 @@
 </a>
 
 <script>
-  // ========================================================
-  // ШАГ 1: Зарегистрируйтесь на https://emailjs.com
-  // ШАГ 2: Создайте Email Service (Gmail) и Email Template
-  // ШАГ 3: Вставьте свои значения в три строки ниже:
-  // ========================================================
-  const EMAILJS_SERVICE_ID  = 'service_oovxbkk';   // например: service_abc123
-  const EMAILJS_TEMPLATE_ID = 'template_777y3dr';  // например: template_xyz789
-  const EMAILJS_PUBLIC_KEY  = 'HQE9EdsXPaPK5z-GD';   // например: aBcDeFgHiJkLmNoP
-
-  // Инициализация EmailJS (библиотека загружена в <head>)
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-  }
-
   // Маска телефона: всегда начинается с +7
   const phoneInput = document.getElementById('phone');
   phoneInput.addEventListener('input', function() {
@@ -691,10 +678,11 @@
     }
   });
 
-  // Отправка формы
-  document.getElementById('astroForm').addEventListener('submit', async function(e) {
+  // Отправка формы — всегда через mailto (открывает Gmail с заполненным письмом)
+  document.getElementById('astroForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = this.querySelector('.submit-btn');
+
+    const btn       = this.querySelector('.submit-btn');
     const successEl = document.getElementById('formSuccess');
     const errorEl   = document.getElementById('formError');
     successEl.style.display = 'none';
@@ -704,39 +692,34 @@
     const fromPhone = document.getElementById('phone').value.trim();
     const message   = document.getElementById('wish').value.trim();
 
+    if (!fromName || !fromPhone || !message) {
+      errorEl.textContent = 'Пожалуйста, заполните все поля.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
     btn.textContent = '⏳ Отправка...';
     btn.disabled = true;
 
-    // Если EmailJS настроен — отправляем через него
-    if (typeof emailjs !== 'undefined' && EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID') {
-      try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          from_name:  fromName,
-          from_phone: fromPhone,
-          message:    message,
-          reply_to:   fromPhone,
-        });
-        successEl.style.display = 'block';
-        this.reset();
-      } catch(err) {
-        console.error('EmailJS error:', err);
-        errorEl.style.display = 'block';
-      }
-    } else {
-      // Fallback: открывает почтовый клиент с заполненным письмом
-      const body = encodeURIComponent(
-        'Имя: ' + fromName + '\nТелефон: ' + fromPhone + '\nЗапрос: ' + message
-      );
-      window.open(
-        'mailto:maksimalekseenko488@gmail.com?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%D0%90%D1%81%D1%82%D1%80%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%8F&body=' + body,
-        '_self'
-      );
-      successEl.style.display = 'block';
-      this.reset();
-    }
+    const subject = encodeURIComponent('Заявка с сайта — Астрология');
+    const body    = encodeURIComponent(
+      'Имя: ' + fromName + '\n' +
+      'Телефон: ' + fromPhone + '\n' +
+      'Запрос: ' + message
+    );
 
-    btn.textContent = '✦ Отправить заявку';
-    btn.disabled = false;
+    const mailtoLink = 'mailto:maksimalekseenko488@gmail.com?subject=' + subject + '&body=' + body;
+
+    // Открываем mailto — сработает в любом браузере
+    window.location.href = mailtoLink;
+
+    // Показываем сообщение об успехе и сбрасываем форму
+    setTimeout(function() {
+      successEl.style.display = 'block';
+      document.getElementById('astroForm').reset();
+      btn.textContent = '✦ Отправить заявку';
+      btn.disabled = false;
+    }, 500);
   });
 </script>
 
