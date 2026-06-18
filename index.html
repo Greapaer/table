@@ -10,17 +10,17 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --deep:    #0D0520;
-    --void:    #160832;
-    --purple:  #4A1589;
-    --violet:  #7C3AED;
-    --lavender:#A78BFA;
-    --lilac:   #DDD6FE;
+    --deep:    #2E1260;
+    --void:    #3D1A78;
+    --purple:  #6B35B5;
+    --violet:  #8B5CF6;
+    --lavender:#C4B5FD;
+    --lilac:   #EDE9FE;
     --gold:    #F0C040;
     --goldlt:  #FDE68A;
     --cream:   #F5F0FF;
     --white:   #FFFFFF;
-    --muted:   #C4B5FD;
+    --muted:   #D8B4FE;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,8 +35,8 @@
   /* STARS */
   .stars-bg {
     position: fixed; inset: 0; pointer-events: none; z-index: 0;
-    background: radial-gradient(ellipse at 20% 30%, #2D0D5A 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 70%, #1A0A3D 0%, transparent 55%),
+    background: radial-gradient(ellipse at 20% 30%, #5B2A9E 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, #3D1A78 0%, transparent 55%),
                 var(--deep);
   }
   .stars-bg::before, .stars-bg::after {
@@ -424,13 +424,14 @@
 <section class="hero">
   <div class="hero-orbit"></div>
   <p class="hero-eyebrow">✦ &nbsp; Личная астрология &nbsp; ✦</p>
-  <h1>Звёзды знают<br><em>ваш ответ</em></h1>
+  <h1>Меня зовут <em>Елена</em>,<br>я астролог</h1>
   <p class="hero-sub">
-    Удачный момент для покупки или продажи жилья. Благоприятный период для любви и отношений. Финансовый прогноз по вашей карте рождения — звёзды говорят, если уметь слушать.
+    Я помогаю людям находить ответы там, где их не ждут — в звёздах.<br>
+    Хотите узнать, когда лучше <strong style="color:var(--lavender)">продать или купить жильё</strong>? Когда ждать <strong style="color:var(--lavender)">любви и гармонии</strong> в личной жизни? Когда самый удачный момент для <strong style="color:var(--lavender)">финансовых решений</strong>? Я читаю вашу натальную карту и даю конкретные ответы с реальными датами — без воды и общих фраз. Звёзды уже написали ваш сценарий, я помогу его прочитать.
   </p>
   <div class="hero-cta-group">
     <a href="#contact" class="btn-primary">Получить консультацию</a>
-    <a href="#prices" class="btn-outline">Посмотреть услуги</a>
+    <a href="#contact" class="btn-outline">Задать вопрос</a>
   </div>
 </section>
 
@@ -488,7 +489,7 @@
           <div class="contact-icon">✉️</div>
           <div>
             <div style="font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Email</div>
-            <a href="mailto:maksimalekseenko488@gmail.com">maksimalekseenko488@gmail.com</a>
+            <a href="mailto:alekseenkoelena@mail.ru">alekseenkoelena@mail.ru</a>
           </div>
         </div>
 
@@ -568,10 +569,13 @@
     }
   });
 
-  // Отправка формы — всегда через mailto (открывает Gmail с заполненным письмом)
-  document.getElementById('astroForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  // Автоотправка формы на почту через Web3Forms
+  // ШАГ: зайдите на https://web3forms.com → введите alekseenkoelena@mail.ru
+  //       → получите Access Key → вставьте его ниже вместо YOUR_ACCESS_KEY
+  const WEB3FORMS_KEY = 'ca633f35-880b-48e6-9fa3-88060a69afb8';
 
+  document.getElementById('astroForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
     const btn       = this.querySelector('.submit-btn');
     const successEl = document.getElementById('formSuccess');
     const errorEl   = document.getElementById('formError');
@@ -591,25 +595,44 @@
     btn.textContent = '⏳ Отправка...';
     btn.disabled = true;
 
-    const subject = encodeURIComponent('Заявка с сайта — Астрология');
-    const body    = encodeURIComponent(
-      'Имя: ' + fromName + '\n' +
-      'Телефон: ' + fromPhone + '\n' +
-      'Запрос: ' + message
-    );
-
-    const mailtoLink = 'mailto:maksimalekseenko488@gmail.com?subject=' + subject + '&body=' + body;
-
-    // Открываем mailto — сработает в любом браузере
-    window.location.href = mailtoLink;
-
-    // Показываем сообщение об успехе и сбрасываем форму
-    setTimeout(function() {
+    // Если ключ вставлен — отправляем автоматически
+    if (WEB3FORMS_KEY !== 'YOUR_ACCESS_KEY') {
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: 'Заявка с сайта — Астрология',
+            from_name: fromName,
+            phone: fromPhone,
+            message: message,
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          successEl.textContent = '✓ Заявка отправлена! Елена свяжется с вами в ближайшее время.';
+          successEl.style.display = 'block';
+          this.reset();
+        } else {
+          throw new Error('failed');
+        }
+      } catch(err) {
+        errorEl.textContent = 'Ошибка отправки. Позвоните нам или напишите в WhatsApp.';
+        errorEl.style.display = 'block';
+      }
+    } else {
+      // Fallback до получения ключа: открывает почту с заполненным письмом
+      const subject = encodeURIComponent('Заявка с сайта — Астрология');
+      const body    = encodeURIComponent('Имя: ' + fromName + '\nТелефон: ' + fromPhone + '\nЗапрос: ' + message);
+      window.location.href = 'mailto:alekseenkoelena@mail.ru?subject=' + subject + '&body=' + body;
+      successEl.textContent = '✓ Открываем почту с заполненной заявкой...';
       successEl.style.display = 'block';
-      document.getElementById('astroForm').reset();
-      btn.textContent = '✦ Отправить заявку';
-      btn.disabled = false;
-    }, 500);
+      this.reset();
+    }
+
+    btn.textContent = '✦ Отправить заявку';
+    btn.disabled = false;
   });
 </script>
 
