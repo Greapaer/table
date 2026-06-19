@@ -524,6 +524,7 @@
   }
 
   .anketa-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .anketa-row .field { margin-bottom: 0; }
   @media (max-width: 600px) { .anketa-row { grid-template-columns: 1fr; } }
 
   /* Pill-style choice buttons */
@@ -583,6 +584,28 @@
   }
   .anketa-form-card .field label {
     color: var(--lilac);
+  }
+  .anketa-form-card .field-row-label {
+    display: block; font-size: 0.78rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ank-yellow); font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .anketa-date-input {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.06em;
+  }
+  .anketa-date-input::placeholder { letter-spacing: normal; }
+  .anketa-city-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4C4FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    padding-left: 2.6rem !important;
+  }
+  .anketa-date-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4C4FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='3'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    padding-left: 2.6rem !important;
   }
 
   .anketa-submit-btn {
@@ -770,8 +793,14 @@
         <div class="anketa-q">
           <div class="anketa-q-title"><span class="anketa-q-num">2</span> Дата, город и время рождения</div>
           <div class="anketa-row">
-            <input type="text" id="birthDate" name="birthDate" placeholder="Дата рождения (дд.мм.гггг)" required>
-            <input type="text" id="birthCity" name="birthCity" placeholder="Город рождения" required>
+            <div class="field">
+              <label class="field-row-label">Дата рождения</label>
+              <input type="text" inputmode="numeric" class="anketa-date-input" id="birthDate" name="birthDate" placeholder="дд.мм.гггг" maxlength="10" required>
+            </div>
+            <div class="field">
+              <label class="field-row-label">Город рождения</label>
+              <input type="text" class="anketa-city-input" id="birthCity" name="birthCity" placeholder="Например, Краснодар" required>
+            </div>
           </div>
           <p class="choice-sub-label">Откуда известно время рождения?</p>
           <div class="choice-group" data-group="timeSource">
@@ -791,8 +820,14 @@
         <div class="anketa-q">
           <div class="anketa-q-title"><span class="anketa-q-num">3</span> Первый брак</div>
           <div class="anketa-row">
-            <input type="text" id="marriageDate" name="marriageDate" placeholder="Дата первого брака">
-            <input type="text" id="marriageCity" name="marriageCity" placeholder="Город первого бракосочетания">
+            <div class="field">
+              <label class="field-row-label">Дата первого брака</label>
+              <input type="text" inputmode="numeric" class="anketa-date-input" id="marriageDate" name="marriageDate" placeholder="дд.мм.гггг" maxlength="10">
+            </div>
+            <div class="field">
+              <label class="field-row-label">Город бракосочетания</label>
+              <input type="text" class="anketa-city-input" id="marriageCity" name="marriageCity" placeholder="Город">
+            </div>
           </div>
         </div>
 
@@ -844,16 +879,34 @@
           <div class="anketa-q-title"><span class="anketa-q-num">6</span> Документы и недвижимость</div>
           <div class="anketa-q-hint">Если не помните точную дату — укажите приблизительно</div>
           <div class="anketa-row">
-            <input type="text" id="licenseDate" name="licenseDate" placeholder="Первые права — дата выдачи">
-            <input type="text" id="licenseCity" name="licenseCity" placeholder="Первые права — город выдачи">
+            <div class="field">
+              <label class="field-row-label">Первые права — дата выдачи</label>
+              <input type="text" inputmode="numeric" class="anketa-date-input" id="licenseDate" name="licenseDate" placeholder="дд.мм.гггг" maxlength="10">
+            </div>
+            <div class="field">
+              <label class="field-row-label">Первые права — город выдачи</label>
+              <input type="text" class="anketa-city-input" id="licenseCity" name="licenseCity" placeholder="Город">
+            </div>
           </div>
           <div class="anketa-row">
-            <input type="text" id="passportDate" name="passportDate" placeholder="Первый загранпаспорт — дата выдачи">
-            <input type="text" id="passportCity" name="passportCity" placeholder="Первый загранпаспорт — город выдачи">
+            <div class="field">
+              <label class="field-row-label">Первый загранпаспорт — дата выдачи</label>
+              <input type="text" inputmode="numeric" class="anketa-date-input" id="passportDate" name="passportDate" placeholder="дд.мм.гггг" maxlength="10">
+            </div>
+            <div class="field">
+              <label class="field-row-label">Первый загранпаспорт — город выдачи</label>
+              <input type="text" class="anketa-city-input" id="passportCity" name="passportCity" placeholder="Город">
+            </div>
           </div>
           <div class="anketa-row">
-            <input type="text" id="propertyDate" name="propertyDate" placeholder="Личная недвижимость — дата оформления/договора">
-            <input type="text" id="propertyCity" name="propertyCity" placeholder="Личная недвижимость — город">
+            <div class="field">
+              <label class="field-row-label">Личная недвижимость — дата оформления / договора</label>
+              <input type="text" inputmode="numeric" class="anketa-date-input" id="propertyDate" name="propertyDate" placeholder="дд.мм.гггг" maxlength="10">
+            </div>
+            <div class="field">
+              <label class="field-row-label">Личная недвижимость — город</label>
+              <input type="text" class="anketa-city-input" id="propertyCity" name="propertyCity" placeholder="Город">
+            </div>
           </div>
         </div>
 
@@ -932,6 +985,23 @@
       });
     }
   }
+
+  // === Маска даты: только цифры, автоматически дд.мм.гггг ===
+  document.querySelectorAll('.anketa-date-input').forEach(function(input) {
+    input.addEventListener('input', function() {
+      let digits = this.value.replace(/\D/g, '').slice(0, 8);
+      let formatted = digits;
+      if (digits.length > 4) {
+        formatted = digits.slice(0, 2) + '.' + digits.slice(2, 4) + '.' + digits.slice(4);
+      } else if (digits.length > 2) {
+        formatted = digits.slice(0, 2) + '.' + digits.slice(2);
+      }
+      this.value = formatted;
+    });
+    input.addEventListener('keypress', function(e) {
+      if (!/[0-9]/.test(e.key)) e.preventDefault();
+    });
+  });
 </script>
 
 <script>
@@ -961,7 +1031,7 @@
   // Автоотправка анкеты на почту через Web3Forms
   // ШАГ: зайдите на https://web3forms.com → введите maksimalekseenko488@gmail.com
   //       → получите Access Key → вставьте его ниже вместо YOUR_ACCESS_KEY
-  const WEB3FORMS_KEY = 'ca633f35-880b-48e6-9fa3-88060a69afb8';
+  const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY';
   const TARGET_EMAIL = 'maksimalekseenko488@gmail.com';
 
   function getRadioValue(name) {
