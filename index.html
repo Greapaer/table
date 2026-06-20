@@ -158,7 +158,7 @@
   .nav-links a {
     color: var(--muted); font-size: 0.875rem; font-weight: 500;
     text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase;
-    transition: color 0.3s;
+    transition: color 0.3s; cursor: pointer;
   }
   .nav-links a:hover { color: var(--gold); }
   .nav-phone {
@@ -220,6 +220,7 @@
     border: none; cursor: pointer;
     box-shadow: 0 8px 30px rgba(124,58,237,0.4);
     transition: all 0.3s; display: inline-block;
+    font-family: 'Raleway', sans-serif;
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,58,237,0.6); }
   .btn-outline {
@@ -227,6 +228,7 @@
     border: 1px solid rgba(124,58,237,0.6); padding: 0.9rem 2.2rem;
     border-radius: 50px; text-decoration: none; font-weight: 500;
     font-size: 0.95rem; transition: all 0.3s; display: inline-block;
+    font-family: 'Raleway', sans-serif; cursor: pointer;
   }
   .btn-outline:hover { background: rgba(124,58,237,0.15); border-color: var(--violet); }
 
@@ -275,75 +277,6 @@
     margin: 0 5%;
   }
 
-  /* PRICES */
-  .prices-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-  }
-  .price-card {
-    background: rgba(22,8,50,0.8);
-    border: 1px solid rgba(124,58,237,0.3);
-    border-radius: 24px; padding: 2.5rem 2rem;
-    display: flex; flex-direction: column;
-    position: relative; overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
-    backdrop-filter: blur(10px);
-  }
-  .price-card:hover { transform: translateY(-5px); border-color: rgba(124,58,237,0.7); }
-  .price-card.featured {
-    border-color: var(--gold);
-    background: linear-gradient(160deg, rgba(74,21,137,0.5), rgba(22,8,50,0.9));
-  }
-  .price-card.featured::before {
-    content: '★ Популярный';
-    position: absolute; top: 1.2rem; right: 1.2rem;
-    background: var(--gold); color: #1A0A2E;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
-    padding: 0.25rem 0.8rem; border-radius: 50px;
-  }
-  .price-icon { font-size: 2rem; margin-bottom: 1.2rem; }
-  .price-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; font-weight: 600; color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-  .price-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
-  .price-amount {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem; font-weight: 700; color: var(--gold);
-    margin-bottom: 0.2rem; line-height: 1;
-  }
-  .price-amount span { font-size: 1rem; font-weight: 400; color: var(--muted); }
-  .price-duration { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.8rem; }
-  .price-features { list-style: none; flex: 1; margin-bottom: 1.8rem; }
-  .price-features li {
-    font-size: 0.875rem; color: var(--cream);
-    padding: 0.45rem 0;
-    border-bottom: 1px solid rgba(124,58,237,0.15);
-    display: flex; align-items: flex-start; gap: 0.5rem;
-  }
-  .price-features li::before { content: '✦'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
-  .price-cta {
-    background: rgba(124,58,237,0.2); border: 1px solid rgba(124,58,237,0.5);
-    color: var(--lavender); padding: 0.8rem;
-    border-radius: 50px; text-align: center;
-    font-weight: 600; font-size: 0.9rem; cursor: pointer;
-    transition: all 0.3s; text-decoration: none; display: block;
-  }
-  .price-card.featured .price-cta {
-    background: var(--violet); border-color: var(--violet); color: white;
-  }
-  .price-cta:hover { background: var(--violet); border-color: var(--violet); color: white; }
-
-  /* CONTACT FORM */
-  .form-wrap {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
-    align-items: start;
-  }
-  @media (max-width: 768px) { .form-wrap { grid-template-columns: 1fr; } }
-
-  .form-left {}
   .contact-info { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
   .contact-item {
     display: flex; align-items: center; gap: 1rem;
@@ -360,18 +293,6 @@
   .contact-item a { color: var(--lavender); text-decoration: none; transition: color 0.2s; }
   .contact-item a:hover { color: var(--gold); }
 
-  .form-right {}
-  .astro-form {
-    background: rgba(22,8,50,0.8);
-    border: 1px solid rgba(124,58,237,0.3);
-    border-radius: 24px; padding: 2.5rem;
-    backdrop-filter: blur(12px);
-  }
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; color: var(--white); margin-bottom: 0.4rem;
-  }
-  .form-hint { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
   .field { margin-bottom: 1.2rem; }
   .field label {
     display: block; font-size: 0.8rem; letter-spacing: 0.08em;
@@ -392,16 +313,6 @@
   }
   .field input::placeholder, .field textarea::placeholder { color: rgba(196,181,253,0.4); }
   .field textarea { resize: vertical; min-height: 100px; }
-  .submit-btn {
-    width: 100%; padding: 1rem;
-    background: linear-gradient(135deg, var(--violet), #5B21B6);
-    color: white; border: none; border-radius: 50px;
-    font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 700;
-    letter-spacing: 0.05em; cursor: pointer;
-    box-shadow: 0 8px 30px rgba(124,58,237,0.4);
-    transition: all 0.3s; margin-top: 0.5rem;
-  }
-  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,58,237,0.6); }
   .form-success {
     display: none;
     background: rgba(29,158,117,0.15);
@@ -416,9 +327,8 @@
     border-radius: 12px; padding: 1rem 1.2rem;
     color: #F09595; font-size: 0.9rem; margin-top: 1rem; text-align: center;
   }
-  .privacy-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem; opacity: 0.7; }
 
-  /* ANKETA / QUESTIONNAIRE — full width, vibrant */
+  /* ANKETA / QUESTIONNAIRE — full width, vibrant, collapsible */
   :root {
     --ank-pink:   #FF5DA2;
     --ank-orange: #FF9D5C;
@@ -427,24 +337,85 @@
     --ank-violet: #B57BFF;
     --ank-bg1:    #2B1259;
     --ank-bg2:    #5A2A9E;
-    --ank-card:   rgba(255,255,255,0.07);
   }
 
   .anketa-section {
-    padding: 5rem 0 6rem;
-    max-width: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
     width: 100%;
+    height: 100%;
+    background: rgba(10, 4, 25, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3vh 0;
+    overflow-y: auto;
+
+    /* Hidden by default — opens as a modal when a CTA button is clicked */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, visibility 0.35s;
+  }
+  .anketa-section.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .anketa-section::-webkit-scrollbar { width: 8px; }
+  .anketa-section::-webkit-scrollbar-track { background: transparent; }
+  .anketa-section::-webkit-scrollbar-thumb {
+    background: rgba(181,123,255,0.4);
+    border-radius: 10px;
+  }
+  .anketa-modal-box {
+    position: relative;
+    width: min(800px, 94vw);
+    max-height: 94vh;
+    overflow-y: auto;
+    border-radius: 28px;
     background:
       radial-gradient(circle at 15% 20%, rgba(255,93,162,0.18) 0%, transparent 45%),
       radial-gradient(circle at 85% 15%, rgba(92,225,230,0.15) 0%, transparent 45%),
       radial-gradient(circle at 50% 90%, rgba(255,209,102,0.12) 0%, transparent 50%),
       linear-gradient(160deg, var(--ank-bg1), var(--ank-bg2));
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+    transform: translateY(24px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(.2,.9,.3,1.1), opacity 0.35s ease;
+
+    /* Custom scrollbar — Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--ank-violet) rgba(255,255,255,0.06);
   }
-  .anketa-section::before {
+  /* Custom scrollbar — WebKit (Chrome, Safari, Edge) */
+  .anketa-modal-box::-webkit-scrollbar {
+    width: 8px;
+  }
+  .anketa-modal-box::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+  }
+  .anketa-modal-box::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--ank-pink), var(--ank-violet), var(--ank-cyan));
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .anketa-modal-box::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--ank-pink), var(--ank-violet));
+    background-clip: content-box;
+  }
+  .anketa-section.open .anketa-modal-box {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  .anketa-modal-box::before {
     content: '';
     position: absolute; inset: 0;
+    border-radius: 28px;
     background-image:
       radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,255,255,0.7) 0%, transparent 100%),
       radial-gradient(1.5px 1.5px at 28% 65%, rgba(255,255,255,0.5) 0%, transparent 100%),
@@ -455,8 +426,18 @@
       radial-gradient(1.5px 1.5px at 8% 85%, rgba(181,123,255,0.7) 0%, transparent 100%);
     pointer-events: none;
   }
+  .anketa-close-btn {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--white); font-size: 1.2rem; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5; transition: background 0.2s, transform 0.2s;
+  }
+  .anketa-close-btn:hover { background: rgba(255,93,162,0.35); transform: rotate(90deg); }
   .anketa-inner {
-    max-width: 760px; margin: 0 auto; padding: 0 5%;
+    max-width: 760px; margin: 0 auto; padding: 3rem 5% 3.5rem;
     position: relative; z-index: 1;
   }
   .anketa-header { text-align: center; margin-bottom: 3rem; }
@@ -536,6 +517,7 @@
     color: var(--cream); font-size: 0.9rem; font-weight: 500;
     padding: 0.65rem 1.3rem; border-radius: 50px;
     cursor: pointer; transition: all 0.25s; user-select: none;
+    position: relative;
   }
   .choice-pill:hover { border-color: var(--ank-cyan); background: rgba(92,225,230,0.1); }
   .choice-pill input { position: absolute; opacity: 0; pointer-events: none; }
@@ -593,16 +575,14 @@
   .anketa-date-input {
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.06em;
-  }
-  .anketa-date-input::placeholder { letter-spacing: normal; }
-  .anketa-city-input {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4C4FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4C4FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='3'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 1rem center;
     padding-left: 2.6rem !important;
   }
-  .anketa-date-input {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4C4FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='3'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
+  .anketa-date-input::placeholder { letter-spacing: normal; }
+  .anketa-city-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4C4FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 1rem center;
     padding-left: 2.6rem !important;
@@ -645,7 +625,7 @@
     text-decoration: none;
   }
   .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 10px 35px rgba(37,211,102,0.6); }
-  .whatsapp-float svg { width: 30px; height: 30px; fill: white; }
+  .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
   .wa-tooltip {
     position: absolute; right: 68px; top: 50%; transform: translateY(-50%);
     background: rgba(22,8,50,0.95); color: var(--cream);
@@ -660,7 +640,6 @@
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero h1 { font-size: 2.5rem; }
-    .prices-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -680,10 +659,6 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">✦ <span>Астрология</span></a>
-  <ul class="nav-links">
-    <li><a href="#services">Услуги</a></li>
-    <li><a href="#contact">Консультация</a></li>
-  </ul>
   <a class="nav-phone" href="tel:+79182225555">+7 (918) 222-55-55</a>
 </nav>
 
@@ -697,8 +672,7 @@
     Хотите узнать, когда лучше <strong style="color:var(--lavender)">продать или купить жильё</strong>? Когда ждать <strong style="color:var(--lavender)">любви и гармонии</strong> в личной жизни? Когда самый удачный момент для <strong style="color:var(--lavender)">финансовых решений</strong>? Я читаю вашу карту и даю реальные даты. Звёзды уже написали ваш сценарий, я помогу его прочитать.
   </p>
   <div class="hero-cta-group">
-    <a href="#contact" class="btn-primary">Получить консультацию</a>
-    <a href="#contact" class="btn-outline">Задать вопрос</a>
+    <button type="button" class="btn-primary" id="openAnketaBtn">Получить консультацию</button>
   </div>
 </section>
 
@@ -728,9 +702,11 @@
 
 
 
-<!-- CONTACT / ANKETA — full width -->
+<!-- CONTACT / ANKETA — modal window, hidden by default -->
 <section class="anketa-section" id="contact">
-  <div class="anketa-inner">
+  <div class="anketa-modal-box">
+    <button type="button" class="anketa-close-btn" id="closeAnketaBtn" aria-label="Закрыть">✕</button>
+    <div class="anketa-inner">
 
     <div class="anketa-header">
       <p class="section-label">Анкета для расчёта карты</p>
@@ -931,12 +907,13 @@
     </div>
 
   </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);margin-bottom:0.6rem;">✦ Астрология</p>
-  <p>Личная астрология · Краснодар · <a href="tel:+79182225555">+7 (918) 222-55-55</a></p>
+  <p>Личная астрология · Краснодар · <a href="mailto:astrology_e@mail.ru">astrology_e@mail.ru</a></p>
   <p style="margin-top:0.5rem;opacity:0.5;font-size:0.8rem;">© 2026 Все права защищены</p>
 </footer>
 
@@ -945,10 +922,43 @@
 <!-- WHATSAPP FLOAT -->
 <a class="whatsapp-float" href="https://wa.me/79182225555" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
   <span class="wa-tooltip">Написать в WhatsApp</span>
-  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16 1.5C8.0 1.5 1.5 8.0 1.5 16c0 2.6.7 5.1 1.9 7.2L1.5 30.5l7.5-1.9c2.1 1.1 4.5 1.9 7 1.9C24 30.5 30.5 24 30.5 16S24 1.5 16 1.5zm0 2.5c6.6 0 12 5.4 12 12s-5.4 12-12 12c-2.3 0-4.4-.6-6.2-1.7l-.4-.3-4.4 1.1 1.1-4.3-.3-.5C4.6 20.4 4 18.3 4 16 4 9.4 9.4 4 16 4zm-3.5 7.2c-.3 0-.7.1-.9.4-.4.4-1.4 1.4-1.4 3.4s1.4 3.9 1.6 4.2c.2.3 2.8 4.3 6.8 5.9 3.4 1.3 4.1.9 4.8.8.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.2-.4-.3-.8-.5s-2.5-1.2-2.9-1.4c-.4-.1-.6-.2-.9.2-.3.4-1 1.4-1.3 1.7-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.3-2-.7-.7-1.2-1.5-1.4-1.9-.2-.4 0-.6.1-.8.2-.2.4-.5.6-.7.1-.2.2-.4.3-.7.1-.3 0-.6-.1-.8-.1-.2-1-2.3-1.3-3.2-.2-.6-.5-.6-.7-.6h-.2z"/>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.52 3.62 1.41 5.12L2 22l5.13-1.5a9.84 9.84 0 0 0 4.91 1.31h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.83 14.1c-.25.7-1.45 1.34-1.99 1.42-.51.08-1.16.11-1.87-.12-.43-.13-.98-.32-1.69-.62-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .39 0 .56.01.18.01.42-.07.66.5.25.6.84 2.06.91 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.18.3.79 1.3 1.69 2.1 1.17 1.04 2.16 1.37 2.46 1.52.3.15.48.13.66-.05.18-.18.78-.91.99-1.22.2-.31.41-.26.68-.16.27.1 1.74.82 2.04.97.3.15.5.22.57.35.07.13.07.74-.18 1.44z"/>
   </svg>
 </a>
+
+<script>
+  // === Открытие / закрытие анкеты как модального окна ===
+  const anketaSection = document.getElementById('contact');
+  const anketaModalBox = document.querySelector('.anketa-modal-box');
+
+  function openAnketa() {
+    anketaSection.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAnketa() {
+    anketaSection.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('openAnketaBtn').addEventListener('click', openAnketa);
+  document.getElementById('closeAnketaBtn').addEventListener('click', closeAnketa);
+
+  // Закрытие по клику на тёмный фон (вне модального окна)
+  anketaSection.addEventListener('click', function(e) {
+    if (e.target === anketaSection) {
+      closeAnketa();
+    }
+  });
+
+  // Закрытие по Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && anketaSection.classList.contains('open')) {
+      closeAnketa();
+    }
+  });
+</script>
 
 <script>
   // === Плашки выбора (choice-pill) ===
@@ -963,7 +973,6 @@
   });
 
   function handleConditionalReveals() {
-    // Время рождения появляется после выбора любого источника
     const timeSourceChecked = document.querySelector('input[name="timeSource"]:checked');
     const revealBirthTime = document.getElementById('reveal-birthTime');
     if (timeSourceChecked) {
@@ -972,7 +981,6 @@
       revealBirthTime.classList.remove('open');
     }
 
-    // Тип брака появляется только если выбрано "Есть"
     const maritalStatusChecked = document.querySelector('input[name="maritalStatus"]:checked');
     const revealMaritalType = document.getElementById('reveal-maritalType');
     if (maritalStatusChecked && maritalStatusChecked.value === 'Есть') {
@@ -1029,8 +1037,6 @@
   });
 
   // Автоотправка анкеты на почту через Web3Forms
-  // ШАГ: зайдите на https://web3forms.com → введите maksimalekseenko488@gmail.com
-  //       → получите Access Key → вставьте его ниже вместо YOUR_ACCESS_KEY
   const WEB3FORMS_KEY = 'ca633f35-880b-48e6-9fa3-88060a69afb8';
   const TARGET_EMAIL = 'maksimalekseenko488@gmail.com';
 
@@ -1100,7 +1106,6 @@
       '   Личная недвижимость — дата/договор: ' + (fields.propertyDate || 'не указано') + ', город: ' + (fields.propertyCity || 'не указано') + '\n\n' +
       '7. Запрос к астрологу:\n' + fields.astroRequest;
 
-    // Если ключ вставлен — отправляем автоматически
     if (WEB3FORMS_KEY !== 'YOUR_ACCESS_KEY') {
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
@@ -1118,6 +1123,9 @@
         if (data.success) {
           successEl.style.display = 'block';
           this.reset();
+          document.querySelectorAll('.choice-pill').forEach(function(p){ p.classList.remove('active'); });
+          document.getElementById('reveal-birthTime').classList.remove('open');
+          document.getElementById('reveal-maritalType').classList.remove('open');
         } else {
           throw new Error('failed');
         }
@@ -1126,7 +1134,6 @@
         errorEl.style.display = 'block';
       }
     } else {
-      // Fallback до получения ключа: открывает почту с заполненным письмом
       const subject = encodeURIComponent('Новая анкета с сайта — Астрология');
       const body    = encodeURIComponent(fullMessage);
       window.location.href = 'mailto:' + TARGET_EMAIL + '?subject=' + subject + '&body=' + body;
